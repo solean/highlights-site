@@ -1,0 +1,36 @@
+
+body {
+  font-family: 'Merriweather', serif;
+  font-size: 14px;
+}
+
+.highlightsContainer {
+  padding: 10px;
+  margin-top: 100px;
+}
+
+.highlight {
+  width: 60%;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+
+.highlightedText {
+
+}
+
+.highlightCreatedOn {
+  font-family: 'Fira Mono', monospace;
+  font-size: 12px;
+  text-align: right;
+  margin-top: 10px;
+}
+
+mark {
+  background-color: #fff8ba;
+}
+
+.book {
+  display: inline-block;
+  margin-bottom: 10px;
+}
