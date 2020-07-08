@@ -45,9 +45,10 @@ function buildHighlight(h, key) {
 
   return (
    <div className='highlight' key={ key }>
-      { h.book ? <div className='book'><b>{ h.book.title }</b> - <span>{ h.book.author }</span></div> : '' }
-      <div onClick={ copyText.bind(this, h.selectedText) } className='highlightedText' dangerouslySetInnerHTML={{ __html: highlight }}></div>
-      { h.createdOn ? <div className="highlightCreatedOn">{ formatDate(new Date(h.createdOn)) }</div> : '' }
+      { h.book && <div className='book'><b>{ h.book.title }</b> - <span>{ h.book.author }</span></div> }
+      <div onClick={ copyText.bind(this, h.selectedText) } className='highlightedText'
+        dangerouslySetInnerHTML={{ __html: highlight }}></div>
+      { h.createdOn && <div className="highlightCreatedOn">{ formatDate(new Date(h.createdOn)) }</div> }
     </div>
   )
 }
