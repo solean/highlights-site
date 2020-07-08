@@ -30,11 +30,23 @@ function Highlights({ files }) {
   )
 }
 
-function buildHighlight(h) {
+function buildHighlight(h, key) {
+  const rep = h.representativeText
+  const sel = h.selectedText
+  let highlight = sel
+
+  if ((rep && sel) && rep.length > sel.length) {
+    const startIndex = rep.indexOf(sel)
+
+    highlight = rep.slice(0, startIndex) + '<mark>' + sel + '</mark>' + rep.slice(startIndex + sel.length)
+  } else {
+    highlight = '<mark>' + sel + '</mark>'
+  }
+
   return (
-   <div className='highlight'>
+   <div className='highlight' key={ key }>
       { h.book ? <div className='book'><b>{ h.book.title }</b> - <span>{ h.book.author }</span></div> : '' }
-      <div onClick={ copyText.bind(this, h.selectedText) } className='highlightedText'><mark>{ h.selectedText }</mark></div>
+      <div onClick={ copyText.bind(this, h.selectedText) } className='highlightedText' dangerouslySetInnerHTML={{ __html: highlight }}></div>
       { h.createdOn ? <div className="highlightCreatedOn">{ formatDate(new Date(h.createdOn)) }</div> : '' }
     </div>
   )
