@@ -6,12 +6,21 @@ function All({ highlightFiles }) {
   return (
     <div>
       <Head>
-        <title>All</title>
+        <title>Highlights</title>
       </Head>
 
       <main className='container'>
+        <Header />
         <Highlights files={ highlightFiles } />
       </main>
+    </div>
+  )
+}
+
+function Header({}) {
+  return (
+    <div className='header'>
+      <h1>Highlights</h1>
     </div>
   )
 }

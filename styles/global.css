@@ -2,15 +2,32 @@
 body {
   font-family: 'Merriweather', serif;
   font-size: 14px;
+  margin: 0;
+}
+
+.header {
+  padding: 20px;
+  position: sticky;
+  top: 0;
+}
+
+.header h1 {
+  font-size: 36px;
+  font-family: 'DM Serif Display', serif;
+  cursor: pointer;
+  user-select: none;
+  margin: 0;
+}
+.header h1:hover {
+  text-decoration: underline;
 }
 
 .highlightsContainer {
   padding: 10px;
-  margin-top: 100px;
 }
 
 .highlight {
-  width: 60%;
+  max-width: 700px;
   margin: 0 auto;
   margin-bottom: 40px;
 }
