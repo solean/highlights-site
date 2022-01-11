@@ -6,7 +6,7 @@ function All({ highlightFiles }) {
   return (
     <div>
       <Head>
-        <title>Highlights</title>
+        <title>highlights</title>
       </Head>
 
       <main className='container'>
@@ -20,7 +20,7 @@ function All({ highlightFiles }) {
 function Header({}) {
   return (
     <div className='header'>
-      <h1>Highlights</h1>
+      <h1>./highlights</h1>
     </div>
   )
 }
