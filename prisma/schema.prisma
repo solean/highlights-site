@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model book {
+  id         BigInt    @id @default(autoincrement())
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  name       String?   @db.VarChar
+  author     String?   @db.VarChar
+}
+
+model highlight {
+  id             BigInt    @id @default(autoincrement())
+  book_id        BigInt?
+  type           String?   @db.VarChar
+  text           String?   @db.VarChar
+  outer_text     String?   @db.VarChar
+  page           BigInt?
+  chapter        String?   @db.VarChar
+  location       String?   @db.VarChar
+  highlight_date DateTime? @db.Timestamptz(6)
+  created_at     DateTime? @default(now()) @db.Timestamptz(6)
+}
