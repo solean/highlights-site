@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model book {
+  id         BigInt      @id(map: "book_duplicate_pkey") @default(autoincrement())
+  created_at DateTime?   @default(now()) @db.Timestamptz(6)
+  name       String?     @db.VarChar
+  author     String?     @db.VarChar
+  highlight  highlight[]
+}
+
+model highlight {
+  id             BigInt    @id(map: "highlight_duplicate_pkey") @default(autoincrement())
+  book_id        BigInt?
+  type           String?   @db.VarChar
+  text           String    @db.VarChar
+  outer_text     String?   @db.VarChar
+  page           BigInt?
+  chapter        String?   @db.VarChar
+  location       String?   @db.VarChar
+  highlight_date DateTime? @db.Timestamptz(6)
+  created_at     DateTime? @default(now()) @db.Timestamptz(6)
+  book           book?     @relation(fields: [book_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
