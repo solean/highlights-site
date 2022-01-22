@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Header from '../components/header/header'
+import Header from '../components/header/Header'
 import Highlights from '../components/highlights/Highlights'
 import prisma from '../lib/prisma'
 
