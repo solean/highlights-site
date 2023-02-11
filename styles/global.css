@@ -35,6 +35,11 @@ body {
   text-decoration: underline;
 }
 
+.header a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .highlightsContainer {
   padding: 10px;
 }
