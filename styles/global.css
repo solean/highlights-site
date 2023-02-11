@@ -5,6 +5,14 @@ body {
   margin: 0;
 }
 
+.hidden {
+  display: none;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
 .header {
   padding: 10px 20px;
   position: sticky;
@@ -55,4 +63,24 @@ mark {
 .book {
   display: inline-block;
   margin-bottom: 10px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.paginateButton {
+  width: 70px;
+  border: none;
+  text-decoration: underline;
+  background-color: white;
+  cursor: pointer;
+}
+.paginateButton:hover {
+  background-color: #fff8ba;
+}
+.paginateButton a {
+  color: inherit;
 }
