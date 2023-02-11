@@ -1,16 +1,7 @@
-import React from 'react'
 import Highlight from '../highlight/Highlight'
 
-export default class Highlights extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      highlights: props.highlights || []
-    }
-  }
-
-  render() {
-    let highlights = this.state.highlights.map((h, key) => {
+export default function Highlights({ highlights }) {
+    highlights = highlights.map((h, key) => {
       return  <Highlight highlight={ h } key={ key } />
     })
 
@@ -18,6 +9,5 @@ export default class Highlights extends React.Component {
       <div className='highlightsContainer'>
         { highlights }
       </div>
-    )
-  }
+    ) 
 }
