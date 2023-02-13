@@ -1,20 +1,32 @@
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-function Pagination({ currentPage, numItems, pageSize }) {
+function Pagination({ currentPage, currentQuery, numItems, pageSize }) {
+  const router = useRouter()
+
+  currentPage = Number(currentPage)
+
   let showNext = true
   if (numItems < pageSize) {
     showNext = false
   }
 
-  currentPage = Number(currentPage)
+  const handleChangePage = (page) => {
+    currentQuery.highlights = page
+    router.push({
+      pathname: '/highlights/' + page,
+      query: currentQuery
+    })
+  }
 
   return (
     <div className="pagination">
-      <button className={ currentPage == 0 ? "invisible" : "paginateButton" }>
-        <Link href={ '/highlights/' + (currentPage - 1) }>Back</Link>
+      <button className={ currentPage == 0 ? "invisible" : "paginateButton" }
+              onClick={ () => handleChangePage(currentPage - 1) }>
+        Back
       </button>
-      <button className={ showNext ? "paginateButton" : "invisible" }>
-        <Link href={ '/highlights/' + (currentPage + 1) }>More</Link>
+      <button className={ showNext ? "paginateButton" : "invisible" }
+              onClick={ () => handleChangePage(currentPage + 1)}>
+        More
       </button>
    </div>
   )

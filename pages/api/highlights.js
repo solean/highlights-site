@@ -1,6 +1,11 @@
 import prisma from '../../lib/prisma'
 
-export async function getHighlights(page) {
+export async function getHighlights(page, searchText, selectedBooks) {
+  if (typeof selectedBooks == 'string') {
+    selectedBooks = [selectedBooks]
+  }
+  selectedBooks = selectedBooks && selectedBooks.length ? selectedBooks.map(b => Number(b)) : undefined
+
   let highlights = await prisma.highlight.findMany({
     take: 20,
     skip: page * 20,
@@ -9,6 +14,17 @@ export async function getHighlights(page) {
     },
     include: {
       book: true
+    },
+    where: {
+      AND: [
+        {
+          OR: [
+            { text: { contains: searchText } },
+            { book: { name: { contains: searchText } } },
+          ]
+        },
+        { book_id: { in: selectedBooks } }
+      ]
     }
   })
 
@@ -30,9 +46,9 @@ export async function getHighlights(page) {
 
 export default async function handler(req, res) {
   const query = req.query
-  let { page } = query
+  let { page, searchText, selectedBooks } = query
   page = page || 0
-  let highlights = await getHighlights(page)
+  let highlights = await getHighlights(page, searchText, selectedBooks)
 
   res.status(200).json(highlights)
 }

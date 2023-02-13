@@ -1,16 +1,30 @@
 import Head from 'next/head'
-import Header from '../../components/header/Header'
-import Highlights from '../../components/highlights/Highlights'
 import { useRouter } from 'next/router'
+import Header from '../../components/header/Header'
+import Filters from '../../components/filters/Filters'
+import Highlights from '../../components/highlights/Highlights'
 import Pagination from '../../components/pagination/Pagination'
 import { getHighlights } from '../api/highlights'
+import { getBooks } from '../api/books'
 
 
-function HighlightsPage({ highlights }) {
+function HighlightsPage({ highlights, books }) {
   const router = useRouter()
   const currentPage = router.query.highlights
 
   const pageSize = 20
+
+  const onFilterSearch = async (searchText, selectedBooks) => {
+    selectedBooks = selectedBooks && selectedBooks.map(b => b.value)
+
+    router.push({
+      pathname: '/highlights/0',
+      query: {
+        searchText: searchText,
+        selectedBooks: selectedBooks
+      }
+    })
+  }
 
   return (
     <div>
@@ -20,9 +34,11 @@ function HighlightsPage({ highlights }) {
       </Head>
       <main>
         <Header />
+        <Filters books={ books } onSearch={ onFilterSearch } />
         <Highlights highlights={ highlights } />
         <Pagination
           currentPage={ currentPage }
+          currentQuery= { router.query }
           numItems={ highlights.length }
           pageSize={ pageSize } />
       </main>
@@ -34,11 +50,14 @@ export default HighlightsPage
 
 export const getServerSideProps = async (context) => {
   const currentPage = context.query.highlights
-  let highlights = await getHighlights(currentPage)
+  const { searchText, selectedBooks } = context.query
+  let highlights = await getHighlights(currentPage, searchText, selectedBooks)
+  let books = await getBooks()
 
   return {
     props: {
-      highlights
+      highlights,
+      books
     }
   }
 }

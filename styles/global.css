@@ -89,3 +89,14 @@ mark {
 .paginateButton a {
   color: inherit;
 }
+
+.filters {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.filter {
+  display: inline-block;
+  margin: 0 10px;
+}
