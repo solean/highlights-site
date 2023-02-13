@@ -1,16 +1,16 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import Header from '../../components/header/Header'
-import Filters from '../../components/filters/Filters'
-import Highlights from '../../components/highlights/Highlights'
-import Pagination from '../../components/pagination/Pagination'
-import { getHighlights } from '../api/highlights'
-import { getBooks } from '../api/books'
+import Header from '../components/header/Header'
+import Filters from '../components/filters/Filters'
+import Highlights from '../components/highlights/Highlights'
+import Pagination from '../components/pagination/Pagination'
+import { getHighlights } from './api/highlights'
+import { getBooks } from './api/books'
 
 
-function HighlightsPage({ highlights, books }) {
+function Home({ highlights, books }) {
   const router = useRouter()
-  const currentPage = router.query.highlights
+  const currentPage = router.query.page || 0
 
   const pageSize = 20
 
@@ -18,8 +18,9 @@ function HighlightsPage({ highlights, books }) {
     selectedBooks = selectedBooks && selectedBooks.map(b => b.value)
 
     router.push({
-      pathname: '/highlights/0',
+      pathname: '/',
       query: {
+        page: 0,
         searchText: searchText,
         selectedBooks: selectedBooks
       }
@@ -46,18 +47,20 @@ function HighlightsPage({ highlights, books }) {
   )
 }
 
-export default HighlightsPage
+export default Home
 
 export const getServerSideProps = async (context) => {
-  const currentPage = context.query.highlights
-  const { searchText, selectedBooks } = context.query
-  let highlights = await getHighlights(currentPage, searchText, selectedBooks)
+  const { page, searchText, selectedBooks } = context.query
+  let highlights = await getHighlights(page, searchText, selectedBooks)
   let books = await getBooks()
 
+  console.log(page, searchText, selectedBooks)
   return {
     props: {
       highlights,
-      books
+      books,
+      searchText: searchText || "",
+      selectedBooks: selectedBooks || []
     }
   }
 }

@@ -1,6 +1,7 @@
 import prisma from '../../lib/prisma'
 
 export async function getHighlights(page, searchText, selectedBooks) {
+  page = page || 0
   if (typeof selectedBooks == 'string') {
     selectedBooks = [selectedBooks]
   }

@@ -11,9 +11,9 @@ function Pagination({ currentPage, currentQuery, numItems, pageSize }) {
   }
 
   const handleChangePage = (page) => {
-    currentQuery.highlights = page
+    currentQuery.page = page
     router.push({
-      pathname: '/highlights/' + page,
+      pathname: '/',
       query: currentQuery
     })
   }
