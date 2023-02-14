@@ -8,7 +8,7 @@ import { getHighlights } from './api/highlights'
 import { getBooks } from './api/books'
 
 
-function Home({ highlights, books }) {
+function Home({ highlights, books, searchText, selectedBooks }) {
   const router = useRouter()
   const currentPage = router.query.page || 0
 
@@ -35,8 +35,13 @@ function Home({ highlights, books }) {
       </Head>
       <main>
         <Header />
-        <Filters books={ books } onSearch={ onFilterSearch } />
-        <Highlights highlights={ highlights } />
+        <Filters
+          books={ books }
+          initialSearchText={ searchText }
+          initialSelectedBooks={ selectedBooks }
+          onSearch={ onFilterSearch } />
+        <Highlights
+          highlights={ highlights } />
         <Pagination
           currentPage={ currentPage }
           currentQuery= { router.query }
@@ -54,7 +59,6 @@ export const getServerSideProps = async (context) => {
   let highlights = await getHighlights(page, searchText, selectedBooks)
   let books = await getBooks()
 
-  console.log(page, searchText, selectedBooks)
   return {
     props: {
       highlights,

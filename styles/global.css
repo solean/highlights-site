@@ -22,6 +22,7 @@ body {
   -moz-box-shadow: 0 3px 5px rgba(80, 80, 80, 0.08);
   box-shadow: 0 3px 5px rgba(80, 80, 80, 0.08);
   margin-bottom: 20px;
+  z-index: 1;
 }
 
 .header h1 {

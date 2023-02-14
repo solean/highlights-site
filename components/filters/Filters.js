@@ -1,9 +1,23 @@
 import Select from 'react-select'
 import { useState } from 'react'
 
-function Filters({ books, onSearch }) {
-  const [ searchText, setSearchText ] = useState('')
-  const [ selectedBooks, setSelectedBooks ] = useState([])
+function Filters({ books, initialSearchText, initialSelectedBooks, onSearch }) {
+
+  if (initialSelectedBooks && typeof initialSelectedBooks == 'string') {
+    initialSelectedBooks = [initialSelectedBooks]
+  }
+
+  if (initialSelectedBooks && initialSelectedBooks.length) {
+    initialSelectedBooks = initialSelectedBooks.map(b => {
+      const book = books.find(book => book.id === Number(b))
+      return { value: book.id, label: book.name }
+    })
+  }
+
+
+  const [ searchText, setSearchText ] = useState(initialSearchText || '')
+  const [ selectedBooks, setSelectedBooks ] = useState(initialSelectedBooks || [])
+
 
   const options = books.map(b => {
     return { value: b.id, label: b.name }
