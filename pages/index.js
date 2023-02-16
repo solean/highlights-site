@@ -35,18 +35,24 @@ function Home({ highlights, books, searchText, selectedBooks }) {
       </Head>
       <main>
         <Header />
-        <Filters
-          books={ books }
-          initialSearchText={ searchText }
-          initialSelectedBooks={ selectedBooks }
-          onSearch={ onFilterSearch } />
-        <Highlights
-          highlights={ highlights } />
-        <Pagination
-          currentPage={ currentPage }
-          currentQuery= { router.query }
-          numItems={ highlights.length }
-          pageSize={ pageSize } />
+        <div className="mainGridContainer flex flex-col md:flex-row">
+          <div className="basis-1/3 p-4">
+            <Filters
+              books={ books }
+              initialSearchText={ searchText }
+              initialSelectedBooks={ selectedBooks }
+              onSearch={ onFilterSearch } />
+            <Pagination
+              currentPage={ currentPage }
+              currentQuery= { router.query }
+              numItems={ highlights.length }
+              pageSize={ pageSize } />
+          </div>
+          <div className="basis-2/3 p-4 overflow-y-scroll">
+            <Highlights
+              highlights={ highlights } />
+          </div>
+        </div>
       </main>
     </div>
   )
