@@ -36,7 +36,7 @@ function Home({ highlights, books, searchText, selectedBooks }) {
       <main>
         <Header />
         <div className="mainGridContainer flex flex-col md:flex-row">
-          <div className="basis-1/3 p-4">
+          <div className="basis-1/3 p-4" style={{ borderRight: '1px solid #f3f3f3' }}>
             <Filters
               books={ books }
               initialSearchText={ searchText }
