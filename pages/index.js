@@ -4,6 +4,7 @@ import Header from '../components/header/Header'
 import Filters from '../components/filters/Filters'
 import Highlights from '../components/highlights/Highlights'
 import Pagination from '../components/pagination/Pagination'
+import NoResultsMessage from '../components/noresultsmessage/NoResultsMessage'
 import { getHighlights } from './api/highlights'
 import { getBooks } from './api/books'
 
@@ -49,8 +50,10 @@ function Home({ highlights, books, searchText, selectedBooks }) {
               pageSize={ pageSize } />
           </div>
           <div className="basis-2/3 p-4 overflow-y-scroll">
-            <Highlights
-              highlights={ highlights } />
+            { highlights && highlights.length ?
+                <Highlights highlights={ highlights } />
+                : <NoResultsMessage />
+            }
           </div>
         </div>
       </main>
