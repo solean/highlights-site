@@ -20,8 +20,8 @@ export async function getHighlights(page, searchText, selectedBooks) {
       AND: [
         {
           OR: [
-            { text: { contains: searchText } },
-            { book: { name: { contains: searchText } } },
+            { text: { contains: searchText, mode: 'insensitive' } },
+            { book: { name: { contains: searchText, mode: 'insensitive' } } },
           ]
         },
         { book_id: { in: selectedBooks } }
