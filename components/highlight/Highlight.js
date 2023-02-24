@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { CopyDuplicate } from 'react-basicons'
 
 function copyText(text, e) {
   navigator.clipboard.writeText(text)
@@ -21,12 +23,23 @@ export default function Highlight({ highlight }) {
     highlight = '<mark>' + highlightedText + '</mark>'
   }
 
+  const [hovered, setHovered] = useState(false)
+  const toggleHover = () => setHovered(!hovered)
+
   return (
-    <div className='highlight'>
+    <div className={ hovered ? 'highlight highlightHovered' : 'highlight' }
+         onMouseEnter={ toggleHover }
+         onMouseLeave={ toggleHover }>
       { h.book && <div className='book'><b>{ h.book.name }</b> - <span>{ h.book.author }</span></div> }
-      <div onClick={ copyText.bind(this, highlightedText) } className='highlightedText'
-        dangerouslySetInnerHTML={{ __html: highlight }}></div>
-      { h.highlight_date && <div className="highlightCreatedOn">{ formatDate(new Date(h.highlight_date)) }</div> }
+      <div className='highlightedText'
+           dangerouslySetInnerHTML={{ __html: highlight }}></div>
+      <div className="highlightMetadata">
+        <div className="highlightCopyButton"
+             onClick={ copyText.bind(this, highlightedText) }>
+          <CopyDuplicate />
+        </div>
+        { h.highlight_date && <div className="highlightCreatedOn">{ formatDate(new Date(h.highlight_date)) }</div> }
+      </div>
     </div>
   )
 }

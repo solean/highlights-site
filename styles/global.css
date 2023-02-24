@@ -54,18 +54,36 @@ body {
 .highlight {
   max-width: 700px;
   margin: 0 auto;
-  margin-bottom: 40px;
+  padding-bottom: 40px;
 }
 
 .highlightedText {
 
 }
 
+.highlightMetadata {
+  margin-top: 10px;
+}
+
+.highlightCopyButton {
+  display: inline-block;
+  visibility: hidden;
+  cursor: pointer;
+  user-select: none;
+}
+.highlightCopyButton svg {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+.highlightHovered .highlightCopyButton {
+  visibility: visible;
+}
+
 .highlightCreatedOn {
+  float: right;
   font-family: 'Fira Mono', monospace;
   font-size: 12px;
-  text-align: right;
-  margin-top: 10px;
 }
 
 mark {
