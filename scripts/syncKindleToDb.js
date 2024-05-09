@@ -60,6 +60,16 @@ class KindleSync {
     return highlight
   }
 
+  async getLatestHighlightDate() {
+    const latestHighlight = await prisma.highlight.findFirst({
+      orderBy: {
+        highlight_date: 'desc'
+      }
+    })
+
+    return latestHighlight ? new Date(latestHighlight.highlight_date) : null
+  }
+
   async processJson() {
     if (!this.json) {
       throw new Error('No JSON data provided.'.brightRed)
@@ -68,14 +78,22 @@ class KindleSync {
       throw new Error('JSON improperly formatted, provide array of highlights.'.brightRed)
     }
 
+    const latestHighlightDate = await this.getLatestHighlightDate()
+
     for (let i = 0; i < this.json.length; i++) {
       let h = this.json[i]
+      let highlightDate = new Date(h.date)
+      if (latestHighlightDate && highlightDate <= latestHighlightDate) {
+        console.log('Skipping highlight:'.bold.underline.bgYellow + ` ${h.title}`.brightYellow)
+        continue
+      }
+
       try {
         let highlight = await this.insertHighlight(h.title, h.author, h.content, h.date, h.location)
-        console.log(`Successfully inserted highlight: ${highlight.id}`.brightGreen)
+        console.log('Successfully inserted highlight:'.bold.underline.bgGreen + ` ${h.title} - ${highlight.id}`.brightGreen)
       } catch(e) {
         console.error(e)
-        console.log(`Error inserting highlight: \n${JSON.stringify(h)}`.brightRed)
+        console.log('Error inserting highlight:'.bold.underline.bgRed + ` \n${JSON.stringify(h)}`.brightRed)
       }
     }
   }
