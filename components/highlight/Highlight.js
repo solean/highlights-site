@@ -1,5 +1,11 @@
 import { useState } from 'react'
 import { CopyDuplicate } from 'react-basicons'
+import { Fira_Mono } from 'next/font/google'
+
+const firaMono = Fira_Mono({
+  subsets: ['latin'],
+  weight: '400',
+})
 
 function copyText(text, e) {
   navigator.clipboard.writeText(text)
@@ -38,7 +44,7 @@ export default function Highlight({ highlight }) {
              onClick={ copyText.bind(this, highlightedText) }>
           <CopyDuplicate />
         </div>
-        { h.highlight_date && <div className="highlightCreatedOn">{ formatDate(new Date(h.highlight_date)) }</div> }
+        { h.highlight_date && <div className={ `highlightCreatedOn ${firaMono.className}` }>{ formatDate(new Date(h.highlight_date)) }</div> }
       </div>
     </div>
   )

@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Merriweather', serif;
   font-size: 14px;
   margin: 0;
 }
@@ -29,7 +28,6 @@ body {
 
 .header h1 {
   font-size: 36px;
-  font-family: 'DM Serif Display', serif;
   cursor: pointer;
   user-select: none;
   margin: 0;
@@ -82,7 +80,6 @@ body {
 
 .highlightCreatedOn {
   float: right;
-  font-family: 'Fira Mono', monospace;
   font-size: 12px;
 }
 

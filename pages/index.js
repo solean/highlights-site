@@ -7,6 +7,12 @@ import Pagination from '../components/pagination/Pagination'
 import NoResultsMessage from '../components/noresultsmessage/NoResultsMessage'
 import { getHighlights } from './api/highlights'
 import { getBooks } from './api/books'
+import { Merriweather } from 'next/font/google'
+
+const merriweather = Merriweather({
+  subsets: ['latin'],
+  weight: '400',
+})
 
 
 function Home({ highlights, books, searchText, selectedBooks }) {
@@ -34,7 +40,7 @@ function Home({ highlights, books, searchText, selectedBooks }) {
         <title>highlights - page { currentPage }</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <main className={ `mainContainer ${merriweather.className}` }>
         <Header />
         <div className="mainGridContainer flex flex-col md:flex-row">
           <div className="basis-auto md:basis-1/3 p-4" style={{ borderRight: '1px solid #f3f3f3' }}>
