@@ -5,6 +5,7 @@
 body {
   font-size: 14px;
   margin: 0;
+  @apply transition-colors duration-200;
 }
 
 .hidden {
@@ -13,6 +14,30 @@ body {
 
 .invisible {
   visibility: hidden;
+}
+
+.dark body {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.dark .header {
+  background-color: #1a1a1a;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.dark mark {
+  background-color: #454545;
+  color: #fff8ba;
+}
+
+.dark .paginateButton {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.dark .paginateButton:hover {
+  background-color: #454545;
 }
 
 .header {
