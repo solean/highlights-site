@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { CopyDuplicate } from 'react-basicons'
 import { Fira_Mono } from 'next/font/google'
 
@@ -16,6 +16,12 @@ function formatDate(date) {
 }
 
 export default function Highlight({ highlight }) {
+  const [isDarkMode, setIsDarkMode] = useState(false)
+
+  useEffect(() => {
+    setIsDarkMode(document.documentElement.classList.contains('dark'))
+  }, [])
+
   let h = highlight
   const outerText = h.outer_text || h.text
   const highlightedText = h.text
@@ -42,7 +48,7 @@ export default function Highlight({ highlight }) {
       <div className="highlightMetadata">
         <div className="highlightCopyButton"
              onClick={ copyText.bind(this, highlightedText) }>
-          <CopyDuplicate />
+          <CopyDuplicate color={ isDarkMode ? 'white' : 'black' } />
         </div>
         { h.highlight_date && <div className={ `highlightCreatedOn ${firaMono.className}` }>{ formatDate(new Date(h.highlight_date)) }</div> }
       </div>

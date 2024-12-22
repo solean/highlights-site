@@ -60,7 +60,7 @@ function Filters({ books, initialSearchText, initialSelectedBooks, onSearch }) {
                 backgroundColor: 'var(--tw-bg-opacity)',
                 '@media (prefers-color-scheme: dark)': {
                   '.dark &': {
-                    backgroundColor: 'rgb(31, 41, 55)',
+                    backgroundColor: '#222222',
                     borderColor: 'rgb(75, 85, 99)',
                     '&:hover': {
                       borderColor: 'rgb(107, 114, 128)'
@@ -72,7 +72,7 @@ function Filters({ books, initialSearchText, initialSelectedBooks, onSearch }) {
                 ...baseStyles,
                 backgroundColor: 'white',
                 '.dark &': {
-                  backgroundColor: 'rgb(31, 41, 55)',
+                  backgroundColor: '#222222',
                 }
               }),
               option: (baseStyles, { isFocused, isSelected }) => ({
@@ -91,7 +91,7 @@ function Filters({ books, initialSearchText, initialSelectedBooks, onSearch }) {
                     ? 'rgb(55, 65, 81)'
                     : isFocused 
                       ? 'rgb(75, 85, 99)'
-                      : 'rgb(31, 41, 55)',
+                      : '#222222',
                   color: 'rgb(243, 244, 246)',
                   ':active': {
                     backgroundColor: 'rgb(75, 85, 99)'
@@ -157,7 +157,7 @@ function Filters({ books, initialSearchText, initialSelectedBooks, onSearch }) {
             placeholder="Search"
             value={ searchText }
             onChange={ handleSearchFilterChange }
-            className="block w-full px-3 py-2 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 sm:text-sm"
+            className="block w-full px-3 py-2 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-dark-input sm:text-sm"
           />
         </div>
         <div className="flex justify-center pt-2">
