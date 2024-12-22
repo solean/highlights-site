@@ -90,8 +90,6 @@ body {
 
 .highlightCopyButton {
   display: inline-block;
-  visibility: hidden;
-  cursor: pointer;
   user-select: none;
 }
 .highlightCopyButton svg {
@@ -100,11 +98,10 @@ body {
   height: 20px;
 }
 .highlightHovered .highlightCopyButton {
-  visibility: visible;
+
 }
 
 .highlightCreatedOn {
-  float: right;
   font-size: 12px;
 }
 
