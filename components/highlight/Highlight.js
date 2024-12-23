@@ -18,7 +18,6 @@ function formatDate(date) {
 export default function Highlight({ highlight }) {
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [isLiking, setIsLiking] = useState(false)
-  const [likes, setLikes] = useState(highlight.likes || 0)
 
   useEffect(() => {
     setIsDarkMode(document.documentElement.classList.contains('dark'))
@@ -52,7 +51,7 @@ export default function Highlight({ highlight }) {
       })
       if (response.ok) {
         const data = await response.json()
-        setLikes(data.likes)
+        h.likes = data.likes
       }
     } catch (error) {
       console.error('Error liking highlight: ' + h.id)
@@ -78,7 +77,7 @@ export default function Highlight({ highlight }) {
               onClick={ handleLike }>
             <HeartLoveLike size={ 20 } color={ isDarkMode ? 'white' : 'black' } />
           </div>
-          <span>{ likes }</span>
+          <span className="select-none">{ h.likes }</span>
         </div>
         { h.highlight_date && <div className={ `highlightCreatedOn ${firaMono.className}` }>{ formatDate(new Date(h.highlight_date)) }</div> }
       </div>
